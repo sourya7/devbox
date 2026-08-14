@@ -1,0 +1,40 @@
+minimumLimaVersion: 2.0.0
+
+images:
+  - location: "https://github.com/nixos-lima/nixos-lima/releases/download/v0.2.1/nixos-lima-v0.2.1-aarch64.qcow2"
+    arch: "aarch64"
+    digest: "sha512:748c723b69dbdec40a9acaf78cc9070ae784dcb64b0856ab906efdac822d9abcc65565b8f8dfa4cf8b49cc6c12c372072e83bb5ed9247330a7c22675d9e141ce"
+  - location: "https://github.com/nixos-lima/nixos-lima/releases/download/v0.2.1/nixos-lima-v0.2.1-x86_64.qcow2"
+    arch: "x86_64"
+    digest: "sha512:636c9c24d7aea340c808e72802cd05589d18c1bbeda45242e3c4725cdfdcc497cfdfd4dfecd76e4be7b8de3a688a1046f269c072bce487c0b06a60515262995e"
+
+user:
+  name: dev
+  home: /home/dev.guest
+  shell: /bin/bash
+
+cpus: 4
+memory: 4GiB
+disk: 100GiB
+
+mounts:
+  - location: "~/Dev"
+    mountPoint: "/home/dev.guest/Dev"
+    writable: false
+    9p:
+      cache: "mmap"
+
+portForwards:
+  - proto: udp
+    guestPort: 68
+    guestIP: 0.0.0.0
+    ignore: true
+  # Lets another Lima guest use http://host.lima.internal:18080.
+  # Binding all host interfaces can expose Attic to the LAN; use a host firewall.
+  - guestPort: 8080
+    hostPort: 18080
+    hostIP: "0.0.0.0"
+
+containerd:
+  system: false
+  user: false

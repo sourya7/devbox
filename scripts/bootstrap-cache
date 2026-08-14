@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+# shellcheck source=./scripts/lib.sh
+source "$SCRIPT_DIR/lib.sh"
+INSTANCE=${ATTIC_INSTANCE:-attic-cache}
+
+if limactl list --format '{{.Name}}' | grep -Fxq "$INSTANCE"; then
+  limactl start "$INSTANCE"
+else
+  limactl start --yes --name "$INSTANCE" "$ROOT/attic-lima.yaml"
+fi
+
+if ! limactl shell "$INSTANCE" -- sudo test -f /var/lib/atticd/atticd.env; then
+  echo "Generating the persistent Attic JWT secret"
+  secret=$(openssl genrsa -traditional 4096 2>/dev/null | base64 | tr -d '\n')
+  printf 'ATTIC_SERVER_TOKEN_RS256_SECRET_BASE64=%s\n' "$secret" | \
+    limactl shell "$INSTANCE" -- sudo sh -c \
+      'install -d -m 700 /var/lib/atticd; umask 077; cat > /var/lib/atticd/atticd.env'
+fi
+
+machine=$(limactl shell "$INSTANCE" -- uname -m)
+case "$machine" in
+  aarch64|arm64) configuration=attic-aarch64 ;;
+  x86_64|amd64) configuration=attic-x86_64 ;;
+  *) echo "Unsupported guest architecture: $machine" >&2; exit 1 ;;
+esac
+
+echo "Applying $configuration to Lima instance $INSTANCE"
+limactl shell "$INSTANCE" -- \
+  sudo nixos-rebuild switch --flake "$GUEST_ROOT#$configuration"
+
+echo "Attic is forwarded to http://localhost:18080 on the host."

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+# shellcheck source=./scripts/lib.sh
+source "$SCRIPT_DIR/lib.sh"
+
+if limactl list --format '{{.Name}}' | grep -Fxq "$INSTANCE"; then
+  limactl start "$INSTANCE"
+else
+  limactl start --yes --name "$INSTANCE" "$ROOT/lima.yaml"
+fi
+
+exec "$SCRIPT_DIR/rebuild"

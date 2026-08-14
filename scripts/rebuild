@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+# shellcheck source=./scripts/lib.sh
+source "$SCRIPT_DIR/lib.sh"
+
+configuration=$(guest_configuration)
+echo "Applying $configuration to Lima instance $INSTANCE"
+
+limactl shell "$INSTANCE" -- \
+  sudo nixos-rebuild switch --flake "$GUEST_ROOT#$configuration"
