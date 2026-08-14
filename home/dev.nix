@@ -22,7 +22,9 @@
   programs = {
     home-manager.enable = true;
 
-    bash = {
+    bash.enable = true;
+
+    fish = {
       enable = true;
       shellAliases = {
         e = "emacsclient -t";

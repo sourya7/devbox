@@ -9,4 +9,8 @@ configuration=$(guest_configuration)
 echo "Applying $configuration to Lima instance $INSTANCE"
 
 limactl shell "$INSTANCE" -- \
-  sudo nixos-rebuild switch --flake "$GUEST_ROOT#$configuration"
+  sudo nixos-rebuild boot --flake "$GUEST_ROOT#$configuration"
+
+# lima-init recreates the host mounts during boot. Restarting avoids losing
+# those imperative mounts during a live NixOS switch.
+limactl restart "$INSTANCE"

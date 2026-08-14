@@ -14,10 +14,17 @@
       "users"
       "wheel"
     ];
-    shell = pkgs.bashInteractive;
+    shell = pkgs.fish;
   };
 
+  # Register Fish as a login shell and install its system integration.
+  programs.fish.enable = true;
+
   environment.systemPackages = with pkgs; [
+    bubblewrap
+    socat
+    python3
+    jujutsu
     bashInteractive
     bat
     coreutils
