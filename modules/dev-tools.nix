@@ -25,9 +25,11 @@
     emacs
     fd
     gcc
+    ghostty.terminfo
     gnumake
     jq
     just
+    kitty.terminfo
     nodejs
     pkg-config
     ripgrep
