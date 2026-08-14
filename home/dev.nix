@@ -35,6 +35,8 @@
     git = {
       enable = true;
       settings.init.defaultBranch = "main";
+      userName = "Nix Devbox";
+      userEmail = "user@devbox";
     };
   };
 
