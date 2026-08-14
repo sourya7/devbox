@@ -15,9 +15,9 @@ bootstrap:
 rebuild:
     DEVBOX_INSTANCE={{instance}} ./scripts/rebuild
 
-# Open an interactive Fish shell at the repository mount in the development VM.
+# Open an interactive Zsh shell at the repository mount in the development VM.
 shell:
-    source ./scripts/lib.sh; limactl shell --shell /run/current-system/sw/bin/fish --workdir "$GUEST_ROOT" "$INSTANCE"
+    source ./scripts/lib.sh; limactl shell --shell /run/current-system/sw/bin/zsh --workdir "$GUEST_ROOT" "$INSTANCE"
 
 # Run a command in the development VM, e.g. `just exec git status`.
 exec *args:

@@ -24,7 +24,7 @@
 
     bash.enable = true;
 
-    fish = {
+    zsh = {
       enable = true;
       shellAliases = {
         e = "emacsclient -t";

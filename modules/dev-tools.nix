@@ -14,11 +14,11 @@
       "users"
       "wheel"
     ];
-    shell = pkgs.fish;
+    shell = pkgs.zsh;
   };
 
-  # Register Fish as a login shell and install its system integration.
-  programs.fish.enable = true;
+  # Register Zsh as a login shell and install its system integration.
+  programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
     bubblewrap
