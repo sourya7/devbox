@@ -22,10 +22,12 @@
     bat
     coreutils
     curl
+    emacs
     fd
     gcc
     gnumake
     jq
+    just
     nodejs
     pkg-config
     ripgrep

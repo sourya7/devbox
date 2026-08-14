@@ -15,12 +15,38 @@ Versions are pinned by `flake.lock`.
 
 - Lima 2.x
 - Git
+- [just](https://just.systems/) for the convenience recipes (optional)
 - The repository checked out anywhere below `~/Dev`
 - Nix is only required on the host for updating or checking the flake; the VM
   image already contains Nix.
 
 The template assigns the fixed guest user `dev` and mounts host `~/Dev` writable
 at `/home/dev.guest/Dev`. Source remains on the host, while the VM can be replaced.
+
+## Common commands
+
+Run `just` or `just --list` to see the available recipes. Common operations are:
+
+```bash
+just bootstrap       # Create/start and configure the development VM
+just rebuild         # Apply configuration changes
+just shell           # Enter the development VM
+just stop            # Stop it without deleting its disk
+just check           # Evaluate the flake inside the VM
+just update          # Update flake.lock inside the VM
+just fmt             # Format Nix files inside the VM
+just cache-bootstrap # Create/start the optional Attic VM
+just cache-shell
+just cache-stop
+```
+
+Set `DEVBOX_INSTANCE` or `ATTIC_INSTANCE` to override the default instance names:
+
+```bash
+DEVBOX_INSTANCE=work-devbox just bootstrap
+```
+
+The underlying scripts remain usable without `just`.
 
 ## Start a development VM
 

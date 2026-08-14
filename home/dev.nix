@@ -8,7 +8,6 @@
     stateVersion = "26.05";
 
     packages = with pkgs; [
-      emacs
       fd
       pi-coding-agent
       ripgrep
@@ -29,11 +28,6 @@
         e = "emacsclient -t";
         ll = "ls -alh";
       };
-    };
-
-    emacs = {
-      enable = true;
-      package = pkgs.emacs;
     };
 
     git = {
