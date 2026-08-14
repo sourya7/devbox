@@ -19,7 +19,6 @@ disk: 100GiB
 
 mounts:
   - location: "~/Dev"
-    mountPoint: "/home/dev.guest/Dev"
     writable: false
     9p:
       cache: "mmap"

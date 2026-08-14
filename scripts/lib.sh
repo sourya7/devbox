@@ -9,7 +9,8 @@ if [[ "$ROOT" != "$HOME/Dev/"* ]]; then
   exit 1
 fi
 
-GUEST_ROOT="/home/dev.guest/Dev/${ROOT#"$HOME/Dev/"}"
+# Lima's default mount point mirrors the expanded host path in the guest.
+GUEST_ROOT="$ROOT"
 export ROOT INSTANCE GUEST_ROOT
 
 guest_configuration() {

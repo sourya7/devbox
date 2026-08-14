@@ -20,8 +20,10 @@ Versions are pinned by `flake.lock`.
 - Nix is only required on the host for updating or checking the flake; the VM
   image already contains Nix.
 
-The template assigns the fixed guest user `dev` and mounts host `~/Dev` writable
-at `/home/dev.guest/Dev`. Source remains on the host, while the VM can be replaced.
+The template assigns the fixed guest user `dev`, whose private home is
+`/home/dev.guest`, and mounts host `~/Dev` writable at the same absolute path in
+the guest (for example, `/home/alice/Dev` on Linux or `/Users/alice/Dev` on
+macOS). Source remains on the host, while the VM can be replaced.
 
 ## Common commands
 

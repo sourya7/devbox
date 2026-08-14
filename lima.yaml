@@ -23,7 +23,6 @@ mountType: virtiofs
 mounts:
   # Keep source code on the host so the VM remains replaceable.
   - location: "~/Dev"
-    mountPoint: "/home/dev.guest/Dev"
     writable: true
     9p:
       cache: "mmap"
