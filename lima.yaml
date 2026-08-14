@@ -37,7 +37,3 @@ portForwards:
 containerd:
   system: false
   user: false
-
-message: |
-  Apply the declarative configuration with:
-    ./scripts/rebuild
