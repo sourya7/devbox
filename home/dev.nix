@@ -27,7 +27,7 @@
     zsh = {
       enable = true;
       shellAliases = {
-        e = "emacsclient -t";
+        e = "emacsclient -a '' -t";
         ll = "ls -alh";
       };
     };
