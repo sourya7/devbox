@@ -43,8 +43,10 @@ in
     git = {
       enable = true;
       settings.init.defaultBranch = "main";
-      userName = "Nix Devbox";
-      userEmail = "user@devbox";
+      settings.user = {
+        name = "Nix Devbox";
+        email = "user@devbox";
+      };
     };
 
     zellij = {
