@@ -35,7 +35,7 @@ in
     zsh = {
       enable = true;
       shellAliases = {
-        e = "emacsclient -a '' -t";
+        ec = "emacsclient -a '' -t";
         ll = "ls -alh";
         ze = "zellij";
       };
