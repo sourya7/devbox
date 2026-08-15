@@ -7,7 +7,8 @@ Home Manager defines the `dev` user's environment, and Attic support is optional
 
 - Emacs with a user systemd service
 - Pi coding agent (`pkgs.pi-coding-agent`)
-- ripgrep, fd, Git, tmux, jq, bat, Node.js, GCC, Make, and common CLI tools
+- Zellij with the `zjstatus` and `zellij-choose-tree` plugins
+- ripgrep, fd, Git, tmux, Nushell, jq, bat, Node.js, GCC, Make, and common CLI tools
 
 Versions are pinned by `flake.lock`.
 
@@ -82,7 +83,8 @@ DEVBOX_INSTANCE=work-devbox ./scripts/bootstrap
 - `lima.yaml`: VM resources, image, identity, and host mounts
 - `modules/lima-guest.nix`: NixOS/Lima boot integration
 - `modules/dev-tools.nix`: system development tools and Home Manager wiring
-- `home/dev.nix`: user tools, Emacs, shell, and Pi
+- `home/dev.nix`: user tools, Emacs, shells, Zellij, and Pi
+- `home/zellij.kdl`: Zellij settings and keybindings managed by Home Manager
 - `pi/AGENTS.md`: public Pi instructions managed by Home Manager
 - `config/attic-client.nix`: optional cache endpoint and public key
 - `modules/attic-{client,server}.nix`: cache implementation

@@ -1,4 +1,11 @@
 { lib, pkgs, ... }:
+let
+  zellijChooseTree = pkgs.fetchurl {
+    name = "zellij-choose-tree-0.4.2.wasm";
+    url = "https://github.com/laperlej/zellij-choose-tree/releases/download/v0.4.2/zellij-choose-tree.wasm";
+    hash = "sha256-OGHLzCM9wg0CLm5SSr3bmElcciBIqamalQjgkTuzAeg=";
+  };
+in
 {
   home = {
     username = "dev";
@@ -9,6 +16,7 @@
 
     packages = with pkgs; [
       fd
+      nushell
       pi-coding-agent
       ripgrep
     ];
@@ -38,6 +46,16 @@
       userName = "Nix Devbox";
       userEmail = "user@devbox";
     };
+
+    zellij = {
+      enable = true;
+      extraConfig = builtins.readFile ./zellij.kdl;
+    };
+  };
+
+  xdg.configFile = {
+    "zellij/plugins/zellij-choose-tree.wasm".source = zellijChooseTree;
+    "zellij/plugins/zjstatus.wasm".source = pkgs.zellijPlugins.zjstatus;
   };
 
   services.emacs = {
