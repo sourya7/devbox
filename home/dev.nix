@@ -37,6 +37,7 @@ in
       shellAliases = {
         e = "emacsclient -a '' -t";
         ll = "ls -alh";
+        ze = "zellij";
       };
     };
 
