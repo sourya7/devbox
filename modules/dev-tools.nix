@@ -21,6 +21,7 @@
   programs.zsh.enable = true;
 
   environment.systemPackages = with pkgs; [
+    zoxide
     bubblewrap
     socat
     python3
