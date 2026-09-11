@@ -19,6 +19,7 @@
 
   # Register Zsh as a login shell and install its system integration.
   programs.zsh.enable = true;
+  programs.nix-ld.enable = true;
 
   environment.systemPackages = with pkgs; [
     zoxide
